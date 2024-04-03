@@ -41,6 +41,7 @@ There are configuration settings in `services.yaml` file which you can change fo
   precision: 2 # precision for decimal places on final number formatting
   auto_update: false # Updates exchange file on each run
 ```
+In order to load the data from exchange api , you should add `LAYER_API_KEY` in your `.env` file.
 
 #### Requirements
 - php 8.2+
