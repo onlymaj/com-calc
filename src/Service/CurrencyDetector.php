@@ -2,6 +2,9 @@
 
 namespace App\Service;
 
+/**
+ * Class to detect which currencies has sub units in order to show correct format 
+ */
 class CurrencyDetector
 {
     private const CURR_WITH_NO_SUBUNIT = ['JPY', 'KRW', 'ISK','CLP','PYG','UYU','UZS','VND','VUV','XAF','XOF','YER','MGA','MMK','KHR','KMF','CVE','DJF','GNF','IQD','LAK','MRO'];

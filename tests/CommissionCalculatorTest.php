@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class CommissionFeeCommandTest extends KernelTestCase
 {
 
-    public function testExecute(): void
+    public function testExampleCSVFile(): void
     {
         self::bootKernel();
         $application = new Application(self::$kernel);
