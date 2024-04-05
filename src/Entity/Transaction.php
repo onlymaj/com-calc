@@ -18,8 +18,6 @@ class Transaction
     
     protected string $currency;
 
-    protected bool $isBaseCurrency = true;
-
     protected float $exchangeRate = 1;
 
     public function getDate(): \DateTime
@@ -40,11 +38,6 @@ class Transaction
     public function getExchangeRate(): float
     {
         return $this->exchangeRate;
-    }
-
-    public function isBaseCurrency(): bool
-    {
-        return $this->isBaseCurrency;
     }
 
     public function getCustomerType(): string
@@ -114,11 +107,6 @@ class Transaction
         return $this;
     }
 
-    public function setIsBaseCurrency(bool $isbaseCurrency): self
-    {
-        $this->isBaseCurrency = $isbaseCurrency;
-        return $this;
-    }
 
     public function setExchangeRate(float $exchangeRate): self
     {

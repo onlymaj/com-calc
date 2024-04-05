@@ -64,10 +64,6 @@ class CommissionCalculator
         $amount = $this->toBaseCurrency($transaction->getAmount(), $exchangeRate);
         $transaction->setBaseAmount($amount);
 
-        if ($transaction->getCurrency() !== $this->config['base_currency']) {
-            $transaction->setIsBaseCurrency(false);
-        }
-
         $fee = $commissionType->calculate($transaction, $weekTotal);
         $fee = $this->roundUp($fee * $exchangeRate, $this->config['precision']);
 
