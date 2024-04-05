@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Transaction;
-use App\Service\CurrencyDetector;
+use App\Service\CurrencySubUnitDetector;
 use App\Service\Commission\CommisssionTypeInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
@@ -67,7 +67,7 @@ class CommissionCalculator
         $fee = $commissionType->calculate($transaction, $weekTotal);
         $fee = $this->roundUp($fee * $exchangeRate, $this->config['precision']);
 
-        if (CurrencyDetector::hasSubunit($transaction->getCurrency())) {
+        if (CurrencySubUnitDetector::hasSubunit($transaction->getCurrency())) {
             $fee = (int) ceil($fee);
         }
 

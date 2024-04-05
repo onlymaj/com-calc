@@ -4,7 +4,7 @@ namespace App\Command;
 
 use App\Service\CSVParser;
 use App\Entity\Transaction;
-use App\Service\CurrencyDetector;
+use App\Service\CurrencySubUnitDetector;
 use App\Service\CommissionCalculator;
 use App\Service\Exchange\ExchangeApi;
 use Symfony\Component\Console\Command\Command;
@@ -58,7 +58,7 @@ class CalculateCommisionCommand extends Command
                     ->setCurrency($row[5]);
 
                 $fee = $this->commissionCalculator->calculateFee($transaction, $rates[$transaction->getCurrency()]);
-                if(CurrencyDetector::hasSubunit($transaction->getCurrency())) {
+                if(CurrencySubUnitDetector::hasSubunit($transaction->getCurrency())) {
                     $output->writeln($fee);
                 } else { 
                     $output->writeln(number_format($fee, $this->config['precision'], '.', ''));
