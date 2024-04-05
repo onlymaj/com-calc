@@ -39,17 +39,18 @@ class CommissionCalculator
 
     private function addWeeklyTotal($transaction): void
     {
+        $type = $transaction->getTransactionType();
+        if($type !== 'withdraw')
+            return;
+
         $userId = $transaction->getUserId();
         $week = $transaction->getTransactionWeek();
-        $type = $transaction->getTransactionType();
         $amount = $transaction->getBaseAmount();
 
-        $userTransactions = &$this->userSumTransactions[$userId];
-
-        if (isset($userTransactions[$week][$type])) {
-            $userTransactions[$week][$type] += $amount;
+        if (isset($this->userSumTransactions[$userId][$week])) {
+            $this->userSumTransactions[$userId][$week] += $amount;
         } else {
-            $userTransactions[$week][$type] = $amount;
+            $this->userSumTransactions[$userId][$week] = $amount;
         }
     }
 
@@ -58,8 +59,7 @@ class CommissionCalculator
         $commissionType = $this->getCommissionType($transaction);
         $userId = $transaction->getUserId();
         $week = $transaction->getTransactionWeek();
-        $type = $transaction->getTransactionType();
-        $weekTotal = $this->userSumTransactions[$userId][$week][$type] ?? 0;
+        $weekTotal = $this->userSumTransactions[$userId][$week] ?? 0;
 
         $amount = $this->toBaseCurrency($transaction->getAmount(), $exchangeRate);
         $transaction->setBaseAmount($amount);
